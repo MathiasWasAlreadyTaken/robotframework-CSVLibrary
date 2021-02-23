@@ -93,11 +93,12 @@ class CSVLibrary(object):
         )
         return [item for item in csv_dict]
 
-    def append_to_csv_file(self, filename, data, **kwargs):
+    def append_to_csv_file(self, filename, data, delimiter=',', **kwargs):
         """This keyword will append data to a new or existing CSV file.
         
         - ``filename``:  name of csv file
         - ``data``: iterable(e.g. list or tuple) data.
+        - ``delimiter``: Default: `,`
         - ``quoting`` (int):
           _0_: QUOTE_MINIMAL
           _1_: QUOTE_ALL
@@ -106,7 +107,7 @@ class CSVLibrary(object):
         """
         if isinstance(data[0], dict):
             data = [list(row.items()) for row in data]
-        self._open_csv_file_for_write(filename, data=data, csv_writer=csv.writer, **kwargs)
+        self._open_csv_file_for_write(filename, data=data, csv_writer=csv.writer, delimiter=delimiter, **kwargs)
 
     def csv_file_from_associative(self, filename, data, fieldnames=None, delimiter=',', **kwargs):
         """This keyword will create new file
